@@ -1,5 +1,8 @@
 package org.kidding.controller;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -31,6 +34,18 @@ public class DataSourceTests {
 	@Test
 	public void testConnection() throws SQLException {
 		log.info(ds.getConnection());
+		
+		Connection conn = ds.getConnection();
+		PreparedStatement pstmt = conn.prepareStatement("select now()");
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			log.info(rs.getString(1));
+		}
+		
+		rs.close();
+		conn.close();
+				
 	}
 	
 }
