@@ -44,6 +44,7 @@ public class DataSourceTests {
 		}
 		
 		rs.close();
+		pstmt.close();
 		conn.close();
 				
 	}
